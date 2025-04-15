@@ -1,73 +1,177 @@
 {
-    "latex-workshop.latex.recipes": [
-        {
-            "name": "latexmk (xelatex)",
-            "tools": [
-                "unpack-thuthesis",
-                "xelatexmk"
-            ]
+    // "latex-workshop.latex.recipes": [
+    //     {
+    //         "name": "latexmk (xelatex)",
+    //         "tools": [
+    //             "unpack-thuthesis",
+    //             "xelatexmk"
+    //         ]
+    //     },
+    //     {
+    //         "name": "latexmk (lualatex)",
+    //         "tools": [
+    //             "unpack-thuthesis",
+    //             "lualatexmk"
+    //         ]
+    //     },
+    //     {
+    //         "name": "make thesis",
+    //         "tools": [
+    //             "make-thesis"
+    //         ]
+    //     }
+    // ],
+    // "latex-workshop.latex.tools": [
+    //     {
+    //         "name": "unpack-thuthesis",
+    //         "command": "xetex",
+    //         "args": [
+    //             "-file-line-error",
+    //             "-halt-on-error",
+    //             "-interaction=nonstopmode",
+    //             "thuthesis.ins"
+    //         ],
+    //         "env": {}
+    //     },
+    //     {
+    //         "name": "xelatexmk",
+    //         "command": "latexmk",
+    //         "args": [
+    //             "-xelatex",
+    //             "-file-line-error",
+    //             "-halt-on-error",
+    //             "-interaction=nonstopmode",
+    //             "-synctex=1",
+    //             "-outdir=%OUTDIR%",
+    //             "%DOC%"
+    //         ],
+    //         "env": {}
+    //     },
+    //     {
+    //         "name": "lualatexmk",
+    //         "command": "latexmk",
+    //         "args": [
+    //             "-lualatex",
+    //             "-file-line-error",
+    //             "-halt-on-error",
+    //             "-interaction=nonstopmode",
+    //             "-synctex=1",
+    //             "-outdir=%OUTDIR%",
+    //             "%DOC%"
+    //         ],
+    //         "env": {}
+    //     },
+    //     {
+    //         "name": "make-thesis",
+    //         "command": "make",
+    //         "args": [],
+    //         "env": {}
+    //     }
+    // ],
+    // // 搜索设置：latex-workshop.latex.recipes
+
+    // // Redefine LaTeX compiling recipes.
+    // "latex-workshop.latex.recipes": [  
+    // {  
+    //     "name": "xelatex",  
+    //     "tools": [  
+    //     "xelatex"  
+    //     ]  
+    // },  
+    // {
+    //     "name": "pdflatex",
+    //     "tools": [
+    //     "pdflatex"
+    //     ]
+    // }, 
+    // {  
+    //     "name": "xelatex ➞ bibtex ➞ xelatex × 2",  
+    //     "tools": [  
+    //     "xelatex",  
+    //     "bibtex",  
+    //     "xelatex",  
+    //     "xelatex"
+    //     ]  
+    // },  
+    // {
+    //     "name": "latexmk 🔃",
+    //     "tools": [
+    //     "latexmk"
+    //     ]
+    // }, 
+    // {
+    //     "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+    //     "tools": [
+    //     "pdflatex",
+    //     "bibtex",
+    //     "pdflatex",
+    //     "pdflatex"
+    //     ]
+    // },
+    // {
+    //   "name": "Compile Rnw files",
+    //   "tools": [
+    //     "rnw2pdf"
+    //   ]
+    // }
+    // ],  
+
+    // Redefine LaTeX compiling tools to be used in recipes.
+    "latex-workshop.latex.tools":[  
+    {  
+        "name": "latexmk",  
+        "command": "latexmk",  
+        "args": [  
+        "-synctex=1",  
+        "-interaction=nonstopmode",  
+        "-file-line-error",  
+        "-pdf",  
+        "-outdir=%OUTDIR%",  
+        "%DOC%"  
+        ],  
+        "env": {}  
+        },  
+        {  
+        "name": "pdflatex",  
+        "command": "pdflatex",  
+        "args": [  
+        "-synctex=1",  
+        "-interaction=nonstopmode",  
+        "-file-line-error",  
+        "%DOC%"  
+        ],  
+        "env": {}  
+        },   
+        {  
+        "name": "bibtex",  
+        "command": "bibtex",  
+        "args": [  
+        "%DOCFILE%"  
+        ],  
+        "env": {}  
         },
+        {  
+        "name": "xelatex",  
+        "command": "xelatex",  
+        "args": [  
+        "-synctex=1",  
+        "-interaction=nonstopmode",  
+        "-file-line-error",  
+        "%DOC%"  
+        // 将 %DOC% 替换成 %DOCFILE% 就可以支持编译中文路径下的文件了
+        ],  
+        "env": {}  
+        }, 
         {
-            "name": "latexmk (lualatex)",
-            "tools": [
-                "unpack-thuthesis",
-                "lualatexmk"
-            ]
-        },
-        {
-            "name": "make thesis",
-            "tools": [
-                "make-thesis"
-            ]
+            "name": "rnw2pdf",
+            "command": "Rscript",
+            "args": [
+              "-e",
+              "knitr::knit2pdf('%DOCFILE%')"
+            ],
+            "env": {}
         }
-    ],
-    "latex-workshop.latex.tools": [
-        {
-            "name": "unpack-thuthesis",
-            "command": "xetex",
-            "args": [
-                "-file-line-error",
-                "-halt-on-error",
-                "-interaction=nonstopmode",
-                "thuthesis.ins"
-            ],
-            "env": {}
-        },
-        {
-            "name": "xelatexmk",
-            "command": "latexmk",
-            "args": [
-                "-xelatex",
-                "-file-line-error",
-                "-halt-on-error",
-                "-interaction=nonstopmode",
-                "-synctex=1",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
-            ],
-            "env": {}
-        },
-        {
-            "name": "lualatexmk",
-            "command": "latexmk",
-            "args": [
-                "-lualatex",
-                "-file-line-error",
-                "-halt-on-error",
-                "-interaction=nonstopmode",
-                "-synctex=1",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
-            ],
-            "env": {}
-        },
-        {
-            "name": "make-thesis",
-            "command": "make",
-            "args": [],
-            "env": {}
-        }
-    ],
+    ],  
     "latex-workshop.latex.watch.files.ignore": [
         "**/thuthesis.cls",
         "**/*.bbx",
